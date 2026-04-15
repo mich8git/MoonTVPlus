@@ -982,7 +982,8 @@ const VideoCard = forwardRef<VideoCardHandle, VideoCardProps>(function VideoCard
             </div>
           )}
 
-          {actualEpisodes && actualEpisodes > 1 && orientation === 'vertical' && (
+          {orientation === 'vertical' &&
+            ((actualEpisodes && actualEpisodes > 1) || displayYear) && (
             <div
               className='absolute top-1 right-1 sm:top-2 sm:right-2 flex flex-col gap-0.5 sm:gap-1.5'
               style={{
@@ -996,20 +997,22 @@ const VideoCard = forwardRef<VideoCardHandle, VideoCardProps>(function VideoCard
               }}
             >
               {/* 集数显示 */}
-              <div
-                className='bg-black/60 text-white text-[9px] sm:text-xs font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-md transition-all duration-300 ease-out group-hover:scale-110 backdrop-blur-sm flex items-center justify-center'
-                style={{
-                  WebkitUserSelect: 'none',
-                  userSelect: 'none',
-                  WebkitTouchCallout: 'none',
-                } as React.CSSProperties}
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                  return false;
-                }}
-              >
-                共{actualEpisodes}集
-              </div>
+              {actualEpisodes && actualEpisodes > 1 && (
+                <div
+                  className='bg-black/60 text-white text-[9px] sm:text-xs font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-md transition-all duration-300 ease-out group-hover:scale-110 backdrop-blur-sm flex items-center justify-center'
+                  style={{
+                    WebkitUserSelect: 'none',
+                    userSelect: 'none',
+                    WebkitTouchCallout: 'none',
+                  } as React.CSSProperties}
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                    return false;
+                  }}
+                >
+                  共{actualEpisodes}集
+                </div>
+              )}
 
               {/* 年份显示 */}
               {displayYear && (
